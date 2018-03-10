@@ -4,6 +4,7 @@ const   express                 =                      require('express'),
         logger                  =                      require('morgan'),
         cookieParser            =                      require('cookie-parser'),
         bodyParser              =                      require('body-parser'),
+        session                 =                      require('express-session'),
         debug                   =                      require('debug')('app'),
         http                    =                      require('http'),
         config                  =                      require('./global/config.js'),
@@ -46,6 +47,16 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(cookieParser());
+
+app.use(session({
+    secret: "hbLqpY3aDsIAf3OtTiNzs63p5FbCnU4zEFXIhXmSpyNBWxDZpn0Db3cdxNv3M5l3RR1wENAH8AYPQppbDfLqvgPskg2Zy6bbpELsXm5IGQNa4OYA8mces7W02DDqFEaZ", // 建议使用 128 个字符的随机字符串
+    resave: true,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 60 * 1000 * 60
+    }
+}));
+
 app.use(express.static(path.join(__dirname, 'files')));
 
 app.use( "/Interface", mainRouter );

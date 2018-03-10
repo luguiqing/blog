@@ -1,0 +1,14 @@
+.articleDetail_content{
+    display: flex;
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+.articleDetail_content .content_left{
+    width: 680px;
+}
+.articleDetail_content .content_right{
+    width: 300px;
+}

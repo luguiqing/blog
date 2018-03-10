@@ -10,39 +10,31 @@ client = [
 		children: [
 			{
 				path: '',
-				name: "websiteIndex",
-				component: resolve => require(["@/pages/dashboard"], resolve)
+				component: resolve => require(["@/pages/dashboard"], resolve),
+				children: [
+					{
+						path: '',
+						name: "websiteArticleList",
+						component: resolve => require(["@/pages/articleList"], resolve)
+					}
+				]
 			},
 			{
-				path: 'articleList',
-				name: "websiteArticleList",
-				component: resolve => require(["@/pages/articleList"], resolve)
+				path: 'articleDetail',
+				name: "articleDetail",
+				component: resolve => require(["@/pages/articleDetail"], resolve)
 			}
 		]
-	},{
-		path: "/omsLogin",
-		name: "oms",
+	}
+]
+
+admin = [
+	{
+		path: "/omsIndex",
+		name: "omsIndex",
 		component: resolve => require(["@/pages/omsIndex"], resolve)
 	}
 ]
-// client = [
-// 	{
-// 		path: "/",
-// 		component: resolve => require(["@/pages/websiteIndex"], resolve),
-// 		children: [
-// 			{
-// 				path: '',
-// 				name: "websiteIndex",
-// 				component: resolve => require(["@/pages/dashboard"], resolve)
-// 			},
-// 			{
-// 				path: 'articleList',
-// 				name: "websiteArticleList",
-// 				component: articleList
-// 			}
-// 		]
-// 	}
-// ]
 
 routes = routes.concat(client, admin);
 
