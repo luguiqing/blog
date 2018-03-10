@@ -1,0 +1,202 @@
+[ 00:00:49 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:05:07 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:06:23 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:12:57 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:12:57 ][ Http ][ request options : {"hostname":null,"port":80,"path":"/login","encoding":"utf-8"} ]
+
+[ 00:16:24 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:17:39 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:18:12 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:21:21 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:23:11 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:28:46 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:28:46 ][ Http ][ request options : {"hostname":"127.0.0.1","port":"3000","path":"/user/login","encoding":"utf-8"} ]
+
+[ 00:32:17 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:33:05 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:36:36 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:39:12 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:40:56 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:43:07 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:43:07 ][ Response ][ 登录操作成功 ][ /Interface/login ]
+
+[ 00:43:26 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 00:43:26 ][ Response ][ 修改用户信息操作成功 ][ /Interface/editUserInfo ]
+
+[ 00:44:37 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 00:44:37 ][ Response ][ 修改用户信息操作成功 ][ /Interface/editUserInfo ]
+
+[ 00:50:25 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 00:50:32 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 00:50:38 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 00:50:38 ][ Response ][ 登录操作成功 ][ /Interface/login ]
+
+[ 00:59:52 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 00:59:57 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 01:00:05 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:00:27 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 01:02:37 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 01:02:42 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 01:02:51 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:03:18 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 01:03:35 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 01:04:33 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 01:04:39 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 01:04:44 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:05:22 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:09:47 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:11:04 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:11:05 ][ Response ][ 登录操作成功 ][ /Interface/login ]
+
+[ 01:11:33 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 01:11:41 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 01:12:02 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:12:02 ][ Response ][ 登录操作成功 ][ /Interface/login ]
+
+[ 01:12:43 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing040"}} ][ /Interface/login ]
+
+[ 01:12:43 ][ Response ][ 登录操作成功 ][ /Interface/login ]
+
+[ 01:13:56 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing040"}} ][ /Interface/login ]
+
+[ 01:13:56 ][ Response ][ 登录操作成功 ][ /Interface/login ]
+
+[ 01:22:28 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing040"}} ][ /Interface/login ]
+
+[ 01:23:13 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing040"}} ][ /Interface/login ]
+
+[ 01:24:36 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing1","password":"guiqing040"}} ][ /Interface/login ]
+
+[ 01:27:08 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing1","password":"guiqing040"}} ][ /Interface/login ]
+
+[ 01:32:07 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing1","password":"guiqing040"}} ][ /Interface/login ]
+
+[ 01:32:18 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing040"}} ][ /Interface/login ]
+
+[ 01:32:24 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:32:27 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 01:33:00 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 01:33:05 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 01:33:14 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing040"}} ][ /Interface/login ]
+
+[ 01:33:20 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:34:48 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:36:06 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:36:47 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 01:36:47 ][ Response ][ 登录操作成功 ][ /Interface/login ]
+
+[ 01:37:02 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 01:37:02 ][ Response ][ 修改用户信息操作成功 ][ /Interface/editUserInfo ]
+
+[ 09:50:37 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 09:50:41 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 09:50:52 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing040"}} ][ /Interface/login ]
+
+[ 09:51:13 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 09:51:13 ][ Response ][ 登录操作成功 ][ /Interface/login ]
+
+[ 09:51:23 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 09:51:23 ][ Response ][ 修改用户信息操作成功 ][ /Interface/editUserInfo ]
+
+[ 09:51:44 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 09:51:53 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 09:52:04 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 09:52:08 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 09:52:21 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing1","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 09:52:54 ][ Request ][ {"url":"/Interface/login","method":"POST","params":{"userName":"guiqing","password":"guiqing0409"}} ][ /Interface/login ]
+
+[ 09:52:54 ][ Response ][ 登录操作成功 ][ /Interface/login ]
+
+[ 09:53:03 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 09:53:03 ][ Response ][ 修改用户信息操作成功 ][ /Interface/editUserInfo ]
+
+[ 09:53:09 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 09:53:09 ][ Response ][ 修改用户信息操作成功 ][ /Interface/editUserInfo ]
+
+[ 09:53:14 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 09:53:15 ][ Response ][ 修改用户信息操作成功 ][ /Interface/editUserInfo ]
+
+[ 09:53:16 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 09:53:16 ][ Response ][ 修改用户信息操作成功 ][ /Interface/editUserInfo ]
+
+[ 09:53:19 ][ Request ][ {"url":"/Interface/editUserInfo","method":"POST","params":{}} ][ /Interface/editUserInfo ]
+
+[ 09:53:19 ][ Response ][ 修改用户信息操作成功 ][ /Interface/editUserInfo ]
+
+[ 10:37:29 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 10:37:34 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 10:38:09 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 10:38:14 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 10:38:28 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 10:38:32 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
+[ 10:40:18 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 10:40:21 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+

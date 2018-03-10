@@ -1,0 +1,52 @@
+.quick_look_content{
+    margin-top: 10px;
+    li{
+        display: block;
+        position: relative;
+        padding: 0px 10px 15px 30px;
+        font-size: 14px;
+        .triangle{
+            position: absolute;
+            top: 6px;
+            left: 16px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-color: #fff #fff #fff #0090ce;
+            -webkit-transform-origin: 25% center;
+            transform-origin: 25% center;
+            border-width: 4px;
+        }
+        .con{
+            p{
+                line-height: 1.5;
+            }
+            .show-content{
+                display: none;
+                background-color: #fff;
+                line-height: 1.5;
+                color: #757e88;
+                overflow: hidden;
+            }
+            .title:hover{
+                cursor: pointer;
+                color: #0090ce;
+            }
+        }
+    }
+    li.show{
+        .triangle{
+                    -webkit-transform: rotate(90deg);
+                    transform: rotate(90deg);
+        }
+        .con{
+            .show-content{
+                display: block;
+                transition: height 1s;
+                padding: 10px 10px 15px;
+                margin: 10px 10px 10px 0;
+                border: 1px solid #e6e8eb;
+            }
+        }
+    }
+}
