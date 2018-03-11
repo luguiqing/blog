@@ -5,9 +5,17 @@
 </template>
 
 <script>
-  export default{
-    name: 'App'
-  }
+import Storage from './utils/storage'
+import config from '../global/config'
+export default{
+    name: 'App',
+    beforeMount(){
+        let userInfo = Storage.getItem({ key : 'userInfo', type : 'object'});
+        if(userInfo && userInfo.token && (Date.now()-userInfo.expires) < config.tokenObj.exp ){
+            this.$store.commit("updateLoginStatus", {isLogin : true})
+        }
+    }
+}
 </script>
 <style>
 body, p, ul{

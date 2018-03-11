@@ -66,6 +66,8 @@ module.exports = new class extends Controller {
 			userName  	:    req.body.userName,
 			password 	: 	 req.body.password
 		}).then( result => {
+			req.session.token = Math.random().toString(36).slice(3,8);
+			result.token = req.session.token;
 			return {
 				data : result,
 				str  : "登录"
@@ -89,6 +91,28 @@ module.exports = new class extends Controller {
 			return {
 				data : result,
 				str  : "修改用户信息"
+			}
+		})
+	}
+
+	addArticle( req, res ){
+		this.validEmpty(["userId", "content", "title", "brief", "status"], req.body);
+
+		return this.request('/article/addArticle', req.body).then( result => {
+			return {
+				data : result,
+				str  : "新增文章"
+			}
+		})
+	}
+
+	getArticleDetail( req, res ){
+		this.validEmpty(["userId", "articleId"], req.body);
+
+		return this.request('/article/getArticleDetail', req.body).then( result => {
+			return {
+				data : result,
+				str  : "获取文章详情"
 			}
 		})
 	}

@@ -31,8 +31,15 @@ client = [
 admin = [
 	{
 		path: "/omsIndex",
-		name: "omsIndex",
-		component: resolve => require(["@/pages/omsIndex"], resolve)
+		component: resolve => require(["@/pages/omsIndex"], resolve),
+		children: [
+			{
+				path: '',
+				name: "omsAddArticle",
+				meta: { requiresAuth: true },
+				component: resolve => require(["@/pages/omsAddArticle"], resolve)
+			}
+		]
 	}
 ]
 

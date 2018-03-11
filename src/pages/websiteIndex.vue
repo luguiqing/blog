@@ -8,7 +8,7 @@
             <div class="navbar">
                 <p style="color: #0090ce">River的博客系统</p>
                 <div style="font-size: 0;">
-                    <router-link :to="{name : 'omsIndex'}" v-if="isLogin" style="font-size: 14px; padding-right: 20px; vertical-align: middle;">进入管理后台>></router-link>
+                    <router-link :to="{name : 'omsAddArticle'}" v-if="isLogin" style="font-size: 14px; padding-right: 20px; vertical-align: middle;">进入管理后台>></router-link>
                     <Button type="primary" size="small" v-if="isLogin" @click="logout">登出</Button>
                     <Button type="primary" size="small" v-if="!isLogin" @click="login">登录</Button>
                     <Button type="primary" size="small" v-if="!isLogin">注册</Button>
@@ -29,6 +29,7 @@
     </div>
 </template>
 <script>
+import Storage from '../utils/storage';
 
 export default {
     components: {
@@ -54,6 +55,7 @@ export default {
         },
         logout(){
             //this.$store.commit("updateLoginStatus", {isLogin : false})
+            let self = this;
             this.$ajax({
                 method  : 'post',
                 url     : '/Interface/editUserInfo',
@@ -64,12 +66,9 @@ export default {
                     case 0:
                         console.log(result.data)
 
-                        self.$store.commit("updateLoginStatus", {isLogin : true})
-                        self.visible = true;
+                        self.$store.commit("updateLoginStatus", {isLogin : false})
                         break;
                 }
-            }).catch( err => {
-                console.log(err)
             })
         },
         submit(type){
@@ -87,10 +86,17 @@ export default {
                         }).then( result => {
                             switch(result.data.retcode){
                                 case 0:
-                                    console.log(result.data)
-
                                     self.$store.commit("updateLoginStatus", {isLogin : true})
                                     self.visible = false;
+
+                                    let userInfo = result.data.retdata;
+
+                                    userInfo.token = result.data.retdata.token;
+                                    userInfo.expires = Date.now();
+                                    Storage.setItem({
+                                        key     :       'userInfo',
+                                        data    :        userInfo
+                                    })
                                     break;
                             }
                         }).catch( err => {

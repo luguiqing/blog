@@ -31,8 +31,13 @@
         color: #9ea7b4;
     }
     //header
+    .oms_right{
+        overflow: hidden;
+        overflow-y: scroll;
+    }
     .oms_header{
         display: flex;
+        min-height: 30px;
         height: 50px;
         justify-content: space-between;
         align-items: center;
@@ -40,6 +45,9 @@
         font-size: 14px;
         color: #333;
         background-color:#fff;
+    }
+    .oms_main{
+        margin: 15px 15px 0px;
     }
 }
 </style>
@@ -68,7 +76,7 @@
                     2017-2018 &copy; blog.guiqingl.cn
                 </div>
             </Col>
-            <Col :span="spanRight" class="colH">
+            <Col :span="spanRight" class="colH oms_right">
                 <div class="oms_header">
                     <Icon class="iconLarge" type="arrow-swap" @click.native="toggle"></Icon>
                     <div class="header_right">
@@ -76,12 +84,16 @@
                         <Button type="ghost" icon="log-out" size="small">退出登录</Button>
                     </div>
                 </div>
+                <div class="oms_main">
+                    <router-view></router-view>
+                </div>
             </Col>
         </Row>
     </div>
 </template>
 <script>
 import noResult from "../components/noResult"
+import Storage from "../utils/storage"
 
 export default {
     components: {
@@ -89,6 +101,18 @@ export default {
     },
     beforeMount() {
         let self = this;
+        let userInfo = Storage.getItem({ key : 'userInfo', type : 'object'});
+
+        if(userInfo && userInfo.auth == 2){
+            this.menuList.map( (item) => {
+                if(item.icon === 'ios-people'){
+                    item.child.push({
+                        name    :       'omsUserList',
+                        des     :       '用户列表'
+                    })
+                }
+            })
+        }
     },
     data() {
         return {
@@ -118,8 +142,8 @@ export default {
                     title   :   '用户管理',
                     child   :   [
                         {
-                            name    :   "omsPeopleList",//到时直接this.$router.push({name : name})跳转
-                            des     :   "用户管理"
+                            name    :   "omsupdateUserInfo",//到时直接this.$router.push({name : name})跳转
+                            des     :   "修改信息"
                         }
                     ]
                 }

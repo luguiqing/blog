@@ -96,3 +96,7 @@
 
 [ 22:39:38 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{"url":"http://www.iqiyi.com/v_19rrfs3830.html#vfrm=24-9-0-1"}} ][ /Interface/getSight ]
 
+[ 22:44:36 ][ Request ][ {"url":"/Interface/getSight","method":"POST","params":{}} ][ /Interface/getSight ]
+
+[ 22:44:37 ][ Response ][ 获取每日资讯列表操作成功 ][ /Interface/getSight ]
+
