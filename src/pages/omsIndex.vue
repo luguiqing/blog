@@ -69,7 +69,7 @@
                             <Icon :type="submenu.icon"></Icon>
                             <span class="span_text">{{submenu.title}}</span>
                         </template>
-                        <MenuItem v-for="(item, index) in submenu.child" :name="item.name" :key="index">{{item.des}}</MenuItem>
+                        <MenuItem v-for="(item, index) in submenu.child" :name="item.name" :key="index" @click.native="navigator(item.name)">{{item.des}}</MenuItem>
                     </Submenu>
                 </Menu>
                 <div class="layout-copy">
@@ -81,7 +81,8 @@
                     <Icon class="iconLarge" type="arrow-swap" @click.native="toggle"></Icon>
                     <div class="header_right">
                         <span style="font-size: 12px; margin-right: 10px">欢迎登陆River博客管理系统</span>
-                        <Button type="ghost" icon="log-out" size="small">退出登录</Button>
+                        <Button type="ghost" icon="arrow-return-left" size="small" style="margin-right: 8px;" @click="navigator('websiteArticleList')">返回首页</Button>
+                        <Button type="ghost" icon="log-out" size="small" @click="logout">退出登录</Button>
                     </div>
                 </div>
                 <div class="oms_main">
@@ -118,6 +119,7 @@ export default {
         return {
             spanLeft: 4,
             spanRight: 20,
+            //activeName: 'omsUserArticleList',//激活的菜单name
             menuList: [
                 {
                     icon    :   'ios-paper',
@@ -128,7 +130,7 @@ export default {
                             des     :   "新增随笔"
                         },
                         {
-                            name    :   "omsArticleList",
+                            name    :   "omsUserArticleList",
                             des     :   "随笔列表"
                         },
                         {
@@ -161,6 +163,33 @@ export default {
                 this.spanRight = 22;
             }
             console.log(this.isLogin)
+        },
+        navigator(routeName){
+            if(routeName && routeName.length > 0){
+                this.$router.push({name :  routeName})
+            }else{
+                this.$$Message.error('路由不存在！');
+            }
+        },
+        logout(){
+            let self = this;
+            this.$ajax({
+                method  : 'post',
+                url     : '/Interface/logout',
+                data    :  {
+                }
+            }).then( result => {
+                switch(result.data.retcode){
+                    case 0:
+                        self.$store.commit("updateLoginStatus", {isLogin : false, userInfo : null});
+                        Storage.removeItem('userInfo');
+                        self.$router.push({path : '/'});
+                        break;
+                    default:
+                        self.$Message.error(result.data.retmsg);
+                        break;
+                }
+            })
         }
     },
     computed: {

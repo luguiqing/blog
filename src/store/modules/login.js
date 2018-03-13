@@ -1,11 +1,13 @@
 const login = {
 	state: {
-		isLogin: false
+		isLogin: false,
+		userInfo: null
 	},
 
 	mutations: {
 		updateLoginStatus(state, payload) {
 			state.isLogin = payload.isLogin
+			state.userInfo = payload.userInfo;
 		}
 	}
 };

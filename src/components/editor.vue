@@ -64,7 +64,7 @@ export default {
 
         },
         onEditorChange(event){
-            console.log(event)
+            //console.log(event)
         }
     },
     computed: {

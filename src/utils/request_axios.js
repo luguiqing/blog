@@ -6,7 +6,7 @@ import Storage from './storage';
 import globalConfig from "../../global/config";
 
 //const whiteApi = ['/Interface/getSight', '/Interface/login']
-const whiteApi = ['/Interface/login', '/Interface/getSight']
+const whiteApi = ['/Interface/login', '/Interface/getSight', '/Interface/register', '/Interface/logout']
 
 export function axiosRequest(Vue) {
 	axios.interceptors.request.use(function(config) {

@@ -12,7 +12,6 @@ export default class {
 	*	type @param  value(int, float, object, array)
  	*/
 	static getItem({key, type}){
-		console.log(localStorage.getItem(key))
 		switch(type){
 			case 'int':
 				return Number.parseInt(localStorage.getItem(key));

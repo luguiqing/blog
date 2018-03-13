@@ -12,7 +12,7 @@ export default{
     beforeMount(){
         let userInfo = Storage.getItem({ key : 'userInfo', type : 'object'});
         if(userInfo && userInfo.token && (Date.now()-userInfo.expires) < config.tokenObj.exp ){
-            this.$store.commit("updateLoginStatus", {isLogin : true})
+            this.$store.commit("updateLoginStatus", {isLogin : true, userInfo : userInfo})
         }
     }
 }
@@ -33,5 +33,24 @@ body{
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     /*position: relative;*/
+}
+.clearfix:after{
+    content: '';
+    display: block;
+    clear: both;
+    with: 0;
+    height: 0;
+    overflow: hidden;
+}
+.arrow{
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    width: 15px;
+    height:  15px;
+    border-width: 2px 2px 0 0;
+    border-color: #ccc;
+    border-style: solid;
+    transform: translateY(-50%) matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
 }
 </style>

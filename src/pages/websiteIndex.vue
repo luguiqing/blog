@@ -1,29 +1,30 @@
 <template>
     <div id="websiteIndex">
         <div class="app_header">
-            <p class="app_time">今天是：{{time | formatDate}}</p>
+            <p class="app_time">今天是：{{time | formatDate('dddd')}}</p>
             <a href="https://github.com/luguiqing" class="app_github">github</a>
         </div>
         <div class="app_navbar">
             <div class="navbar">
-                <p style="color: #0090ce">River的博客系统</p>
+                <p style="color: #0090ce; font-family: Comic Sans MS,cursive;">River的博客系统</p>
                 <div style="font-size: 0;">
-                    <router-link :to="{name : 'omsAddArticle'}" v-if="isLogin" style="font-size: 14px; padding-right: 20px; vertical-align: middle;">进入管理后台>></router-link>
-                    <Button type="primary" size="small" v-if="isLogin" @click="logout">登出</Button>
-                    <Button type="primary" size="small" v-if="!isLogin" @click="login">登录</Button>
-                    <Button type="primary" size="small" v-if="!isLogin">注册</Button>
+                    <router-link :to="{name : 'omsUserArticleList'}" v-if="isLogin" style="font-size: 14px; padding-right: 20px; vertical-align: middle;">进入管理后台>></router-link>
+                    <Button type="primary" size="small" v-if="isLogin" @click="logout('logout')">登出</Button>
+                    <Button type="primary" size="small" v-if="!isLogin" @click="login('login')">登录</Button>
+                    <Button type="primary" size="small" v-if="!isLogin" @click="register('register')">注册</Button>
                 </div>
             </div>
         </div>
         <router-view></router-view>
         <Modal v-model="visible" width="460">
-            <p slot="header" style="text-align:center;color:#0090ce; font-size: 20px;">用户登录</p>
+            <p slot="header" style="text-align:center;color:#0090ce; font-size: 20px;">用户{{clickType === 'register' ? '注册' : '登录'}}</p>
             <div style="text-align:center; margin: 20px 0;">
                 <Input v-model="userName" placeholder="用户名" clearable style="width: 400px; margin-bottom: 20px;"></Input>
-                <Input v-model="password" placeholder="密码" clearable style="width: 400px"></Input>
+                <Input v-model="password" type="password" placeholder="密码" clearable style="width: 400px"></Input>
+                <Input v-model="passwordAgain" type="password" placeholder="确认密码" v-if="clickType === 'register'" clearable style="width: 400px; margin-top: 20px;"></Input>
             </div>
             <div slot="footer">
-                <Button type="primary" size="large" long @click="submit('login')">登录</Button>
+                <Button type="primary" size="large" long @click="submit(clickType)">{{clickType === 'register' ? '注册' : '登录'}}</Button>
             </div>
         </Modal>
     </div>
@@ -39,7 +40,9 @@ export default {
             time : new Date(),
             visible : false,//modal
             userName: '',//用户名
-            password: ''
+            password: '',
+            passwordAgain: '',
+            clickType: ''
         }
     },
     mounted(){
@@ -49,27 +52,38 @@ export default {
         togglesight(index){
             this.$set(this.sightStatus, index, !this.sightStatus[index]);
         },
-        login(){
-            this.visible = true;
-            //this.$store.commit("updateLoginStatus", {isLogin : true})
+        clearModal(){
+            this.password = '';
+            this.passwordAgain = '';
+            this.userName = '';
         },
-        logout(){
-            //this.$store.commit("updateLoginStatus", {isLogin : false})
+        login(type){
+            this.clickType = type;
+            this.visible = true;
+        },
+        logout(type){
             let self = this;
+            this.clickType = type;
             this.$ajax({
                 method  : 'post',
-                url     : '/Interface/editUserInfo',
+                url     : '/Interface/logout',
                 data    :  {
                 }
             }).then( result => {
                 switch(result.data.retcode){
                     case 0:
-                        console.log(result.data)
-
-                        self.$store.commit("updateLoginStatus", {isLogin : false})
+                        self.$store.commit("updateLoginStatus", {isLogin : false, userInfo : null})
+                        Storage.removeItem('userInfo');
+                        break;
+                    default:
+                        self.$Message.error(result.data.retmsg);
                         break;
                 }
             })
+        },
+        register(type){
+            this.clickType = type;
+            this.visible = true;
         },
         submit(type){
             let self = this;
@@ -86,26 +100,62 @@ export default {
                         }).then( result => {
                             switch(result.data.retcode){
                                 case 0:
-                                    self.$store.commit("updateLoginStatus", {isLogin : true})
                                     self.visible = false;
-
+                                    self.clearModal();
                                     let userInfo = result.data.retdata;
 
                                     userInfo.token = result.data.retdata.token;
                                     userInfo.expires = Date.now();
+                                    self.$store.commit("updateLoginStatus", {isLogin : true, userInfo : userInfo});
                                     Storage.setItem({
                                         key     :       'userInfo',
                                         data    :        userInfo
                                     })
                                     break;
+                                default:
+                                    self.$Message.error(result.data.retmsg);
                             }
-                        }).catch( err => {
-                            console.log(err)
                         })
                     }else{
                         this.$Message.error("请完善登录信息！");
                     }
                     break
+                case 'register':
+                    if(this.userName.length>0 && this.password.length>0 && this.passwordAgain.length){
+                        if(this.passwordAgain !== this.password){
+                            this.$Message.error("输入的密码不一致！");
+                        }else{
+                           this.$ajax({
+                                method  : 'post',
+                                url     : '/Interface/register',
+                                data    :  {
+                                    userName    :     this.userName,
+                                    password    :     this.password
+                                }
+                            }).then( result => {
+                                switch(result.data.retcode){
+                                    case 0:
+                                        self.visible = false;
+                                        self.clearModal();
+                                        let userInfo = result.data.retdata;
+
+                                        userInfo.token = result.data.retdata.token;
+                                        userInfo.expires = Date.now();
+                                        self.$store.commit("updateLoginStatus", {isLogin : true, userInfo : userInfo});
+                                        Storage.setItem({
+                                            key     :       'userInfo',
+                                            data    :        userInfo
+                                        })
+                                        break;
+                                    default:
+                                        self.$Message.error(result.data.retmsg);
+                                }
+                            })
+                        }
+                    }else{
+                        this.$Message.error("请完善注册信息！");
+                    }
+                    break;
             }
         }
     },

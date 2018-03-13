@@ -27,7 +27,7 @@ Vue.use(VueQuillEditor)
 axiosRequest();
 
 router.beforeEach( (to, from, next) => {
-	console.log(to)
+	//console.log(to)
 	if(to.matched.length ===0){
 		next('/404');
 	}
@@ -36,6 +36,7 @@ router.beforeEach( (to, from, next) => {
 		if(userInfo && userInfo.token && (Date.now()-userInfo.expires) < config.tokenObj.exp ){
 			next()
 		}else{
+			store.commit("updateLoginStatus", {isLogin : false})
 			next('/')
 		}
 	}else{
@@ -43,8 +44,16 @@ router.beforeEach( (to, from, next) => {
 	}
 })
 
-Vue.filter("formatDate", value => {
-	return Moment(value).format("YYYY-MM-DD") + ' ' + Moment(value).format('dddd');
+Vue.filter("formatDate", (value, type )=> {
+	return Moment(value).format("YYYY-MM-DD") + ' ' + Moment(value).format(type);
+});
+
+Vue.filter("formatStrByLen", (value, len) => {
+	if(value.length > len){
+        return value.substring(0, len) + '...';
+    }else{
+        return value;
+    }
 });
 /* eslint-disable no-new */
 new Vue({

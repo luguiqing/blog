@@ -85,6 +85,26 @@ module.exports = new class extends Controller {
 		})*/
 	}
 
+	register( req, res){
+		this.validEmpty(["userName", "password"], req.body);
+		return this.request('/user/register', req.body).then( result => {
+			req.session.token = Math.random().toString(36).slice(3,8);
+			result.token = req.session.token;
+			return {
+				data : result,
+				str  : "注册"
+			}
+		})
+	}
+
+	logout( req, res){
+		req.session.token = null;
+		return {
+			data : '',
+			str  : "退出登录"
+		}
+	}
+
 	editUserInfo( req, res){
 		return this.request('/user/editUserInfo', {}).then( result => {
 			console.log(req);
@@ -113,6 +133,39 @@ module.exports = new class extends Controller {
 			return {
 				data : result,
 				str  : "获取文章详情"
+			}
+		})
+	}
+
+	getArticleListById( req, res ){
+		this.validEmpty(["userId"], req.body);
+
+		return this.request('/article/getArticleListById', req.body).then( result => {
+			return {
+				data : result,
+				str  : "获取文章列表"
+			}
+		})
+	}
+
+	getHotArticleList( req, res ){
+		this.validEmpty(["pageSize", "page"], req.body);
+
+		return this.request('/article/getHotArticleList', req.body).then( result => {
+			return {
+				data : result,
+				str  : "分页获取热门文章列表"
+			}
+		})
+	}
+
+	getArticleListByPageAndId( req, res ){
+		this.validEmpty(["pageSize", "page", "userId"], req.body);
+
+		return this.request('/article/getArticleListByPageAndId', req.body).then( result => {
+			return {
+				data : result,
+				str  : "分页获取自己文章列表"
 			}
 		})
 	}

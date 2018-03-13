@@ -5,7 +5,10 @@ const express 			= 			require("express"),
 	info 		 		= 			require("../controller/infoController"),
 	router 				= 			express.Router();
 
-const whiteApi = ['/login', '/getSight', '/addArticle', '/getArticleDetail']
+const whiteApi = ['/login', '/getSight', "/getHotArticleList", "/register", "/logout"];
+
+//开发不验证
+whiteApi.push('/addArticle',  '/getArticleDetail', '/getArticleListById')
 
 router.all("/*", (req, res, next) => {
 	let logObj = {},
@@ -53,11 +56,22 @@ router.all("/*", (req, res, next) => {
 
 router.post( "/getSight",					( ...args ) => info.safeMode( "getSight", ...args ) );
 
+router.post( "/logout",					( ...args ) => info.safeMode( "logout", ...args ) );
+
 router.post( "/login",					( ...args ) => info.safeMode( "login", ...args ) );
 
+router.post( "/register",					( ...args ) => info.safeMode( "register", ...args ) );
+//暂没写
 router.post( "/editUserInfo",					( ...args ) => info.safeMode( "editUserInfo", ...args ) );
 
 router.post( "/addArticle",					( ...args ) => info.safeMode( "addArticle", ...args ) );
-
+//获取文章详情
 router.post( "/getArticleDetail",					( ...args ) => info.safeMode( "getArticleDetail", ...args ) );
+//获取用户自身文章列表
+router.post( "/getArticleListById",					( ...args ) => info.safeMode( "getArticleListById", ...args ) );
+//分页获取热门文章列表
+router.post( "/getHotArticleList",					( ...args ) => info.safeMode( "getHotArticleList", ...args ) );
+//分页获取自己文章列表
+router.post( "/getArticleListByPageAndId",					( ...args ) => info.safeMode( "getArticleListByPageAndId", ...args ) );
+
 module.exports = router;

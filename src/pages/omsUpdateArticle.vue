@@ -13,10 +13,10 @@
     <div class="omsAddArticl_container">
         <Form :model="formItem" :label-width="70" :rules="ruleValidate" ref="formValidate">
             <FormItem label="文章标题" prop="title">
-                <Input v-model="formItem.title" placeholder="Enter title..." :maxlength="50"></Input>
+                <Input v-model="formItem.title" placeholder="Enter title..."></Input>
             </FormItem>
             <FormItem label="文章简介" prop="brief">
-                <Input v-model="formItem.brief" type="textarea" :autosize="{minRows: 2,maxRows: 5}" :maxlength="200" placeholder="Enter brief..."></Input>
+                <Input v-model="formItem.brief" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter brief..."></Input>
             </FormItem>
             <FormItem label="对外开放">
                 <i-switch v-model="formItem.status" size="large">
@@ -115,7 +115,6 @@ export default {
                                 case 0:
                                     console.log(result.data)
                                     self.$Message.success('保存文章成功');
-                                    self.$router.push({name : 'omsUserArticleList'});
                                     break;
                                 default:
                                     self.$Message.error(result.data.retmsg);
