@@ -43,7 +43,7 @@ export function axiosRequest(Vue) {
 		//console.log(response)
 		switch(response.data.retcode){
 			case -6666:
-				alert(response.data.retmsg);
+				//alert(response.data.retmsg);
 				Storage.removeItem('userInfo');
 				store.commit("updateLoginStatus", {isLogin : false});
 				router.replace({

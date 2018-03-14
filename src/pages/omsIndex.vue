@@ -1,55 +1,5 @@
 <style scoped lang="scss">
-.omsIndex_container{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    .colH{
-        height: 100%;
-    }
-    .colL{
-        background: #495060;
-    }
-    .iconLarge{
-        font-size: 30px;
-    }
-    .ivu-col {
-        position: relative;
-        transition: width .2s ease-in-out;
-    }
-    .menu_text_hidden{
-        .span_text{
-            display: none;
-        }
-    }
-    .layout-copy{
-        position: absolute;
-        bottom: 20px;
-        width: 100%;
-        font-size: 12px;
-        left: 0px;
-        text-align: center;
-        color: #9ea7b4;
-    }
-    //header
-    .oms_right{
-        overflow: hidden;
-        overflow-y: scroll;
-    }
-    .oms_header{
-        display: flex;
-        min-height: 30px;
-        height: 50px;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0px 20px;
-        font-size: 14px;
-        color: #333;
-        background-color:#fff;
-    }
-    .oms_main{
-        margin: 15px 15px 0px;
-    }
-}
+@import "../styles/omsIndex.scss"
 </style>
 <style>
 .menu_text_hidden .ivu-icon-ios-arrow-down:before{
@@ -102,15 +52,20 @@ export default {
     },
     beforeMount() {
         let self = this;
-        let userInfo = Storage.getItem({ key : 'userInfo', type : 'object'});
+        //let userInfo = Storage.getItem({ key : 'userInfo', type : 'object'});
 
-        if(userInfo && userInfo.auth == 2){
+        if(this.userInfo && this.userInfo.auth == 2){
             this.menuList.map( (item) => {
                 if(item.icon === 'ios-people'){
                     item.child.push({
-                        name    :       'omsUserList',
+                        name    :       'omsAllUserList',
                         des     :       '用户列表'
                     })
+                }else if(item.icon === 'ios-paper'){
+                    item.child.push({
+                        name    :       "omsAllArticleList",
+                        des     :       "全部文章"
+                    });
                 }
             })
         }
@@ -195,6 +150,9 @@ export default {
     computed: {
         isLogin(){
             return this.$store.getters.isLogin
+        },
+        userInfo(){
+            return this.$store.getters.userInfo
         }
     },
     watch: {

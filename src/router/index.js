@@ -50,6 +50,18 @@ admin = [
 				name: "omsUpdateArticle",
 				meta: { requiresAuth: true },
 				component: resolve => require(["@/pages/omsUpdateArticle"], resolve)
+			},
+			{
+				path: 'omsAllArticleList',
+				name: "omsAllArticleList",
+				meta: { requiresAuth: true },
+				component: resolve => require(["@/pages/omsAllArticleList"], resolve)
+			},
+			{
+				path: 'omsAllUserList',
+				name: "omsAllUserList",
+				meta: { requiresAuth: true },
+				component: resolve => require(["@/pages/omsAllUserList"], resolve)
 			}
 		]
 	}

@@ -25,16 +25,26 @@ Vue.use(iView);
 Vue.use(VueQuillEditor)
 
 axiosRequest();
+//管理员路由
+const authRouterList = ['omsUserList', 'omsAllArticleList'];
 
 router.beforeEach( (to, from, next) => {
-	//console.log(to)
+	console.log(to)
 	if(to.matched.length ===0){
 		next('/404');
 	}
 	if(to.meta && to.meta.requiresAuth){
 		let userInfo = Storage.getItem({ key : 'userInfo', type : 'object'});
 		if(userInfo && userInfo.token && (Date.now()-userInfo.expires) < config.tokenObj.exp ){
-			next()
+			if(authRouterList.indexOf(to.name) > -1){
+				if(userInfo.auth == 2){
+					next();
+				}else{
+					next('/')
+				}
+			}else{
+				next();
+			}
 		}else{
 			store.commit("updateLoginStatus", {isLogin : false})
 			next('/')

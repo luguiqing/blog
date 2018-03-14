@@ -8,7 +8,8 @@ const express 			= 			require("express"),
 const whiteApi = ['/login', '/getSight', "/getHotArticleList", "/register", "/logout"];
 
 //开发不验证
-whiteApi.push('/addArticle',  '/getArticleDetail', '/getArticleListById')
+whiteApi.push('/addArticle', '/getArticleDetail', '/getArticleListById', '/changeArticleStatus', '/forceDeleteArticle',
+				'/deleteArticle', '/forceDeleteUser', '/changeUserStatus', '/getUserList')
 
 router.all("/*", (req, res, next) => {
 	let logObj = {},
@@ -73,5 +74,19 @@ router.post( "/getArticleListById",					( ...args ) => info.safeMode( "getArticl
 router.post( "/getHotArticleList",					( ...args ) => info.safeMode( "getHotArticleList", ...args ) );
 //分页获取自己文章列表
 router.post( "/getArticleListByPageAndId",					( ...args ) => info.safeMode( "getArticleListByPageAndId", ...args ) );
+//oms获取全部文章列表
+router.post( "/getAllArticleList",					( ...args ) => info.safeMode( "getAllArticleList", ...args ) );
+//管理员更改文章状态
+router.post( "/changeArticleStatus",					( ...args ) => info.safeMode( "changeArticleStatus", ...args ) );
+//管理员强制删除文章
+router.post( "/forceDeleteArticle",					( ...args ) => info.safeMode( "forceDeleteArticle", ...args ) );
+//用户删除文章
+router.post( "/deleteArticle",					( ...args ) => info.safeMode( "deleteArticle", ...args ) );
+//管理员强制改变用户状态
+router.post( "/changeUserStatus",					( ...args ) => info.safeMode( "changeUserStatus", ...args ) );
+//管理员获取用户列表
+router.post( "/getUserList",					( ...args ) => info.safeMode( "getUserList", ...args ) );
+//管理员强制删除用户的全部数据
+router.post( "/forceDeleteUser",					( ...args ) => info.safeMode( "forceDeleteUser", ...args ) );
 
 module.exports = router;

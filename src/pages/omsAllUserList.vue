@@ -25,9 +25,10 @@
     <Modal
         v-model="modalStatus"
         title="操作"
-        @on-ok="deleteArticle">
+        @on-ok="confirmModal">
         <Icon type="ios-information" class="warn_icon"></Icon>
-        <p class="model_conten">确定删除文章"{{articleTitle}}"?</p>
+        <p v-if="modalClickType == 'deleteUser'" class="model_conten">确定删除用户"{{userName}}"?</p>
+        <p v-if="modalClickType == 'controlStatus'" class="model_conten">确定{{userStatus == '1' ? '冻结' : '解冻'}}用户“{{userName}}”?</p>
     </Modal>
 </div>
 </template>
@@ -45,7 +46,7 @@ export default {
 
         this.$ajax({
             method  : 'post',
-            url     : '/Interface/getArticleListById',
+            url     : '/Interface/getUserList',
             data    :  {
                 userId  :   this.userInfo._id
             }
@@ -76,17 +77,17 @@ export default {
             //table -- props
             searchList: [
                 {
-                    name :  "标题",
-                    value:  "title"
+                    name :  "用户",
+                    value:  "userName"
                 },
                 {
-                    name :  "发布时间",
+                    name :  "注册时间",
                     value:  "createDate"
                 }
             ],
             filter: function(data, searchType, searchValue){
                 switch(searchType){
-                    case 'title':
+                    case 'userName':
                         return data[searchType].indexOf(searchValue) > -1 ? true : false;
                         break;
                     case 'createDate':
@@ -103,37 +104,14 @@ export default {
                     sortable: true
                 },
                 {
-                    title: '文章标题',
-                    key: 'title',
+                    title: '用户',
+                    key: 'userName',
                     ellipsis: true
                 },
                 {
-                    title: '发布时间',
+                    title: '注册时间',
                     key: 'createDate',
                     ellipsis: true
-                },
-                {
-                    title: '修改时间',
-                    key: 'updateDate',
-                    ellipsis: true
-                },
-                {
-                    title: '标签',
-                    key: 'tagId',
-                    ellipsis: true,
-                    render: (h, params) => {
-                        const row = params.row;
-                        if(row['tagId'].length > 0){
-                            //todo,暂时没写标签
-                        }else{
-                            return h('div', {
-                                props: {
-                                    color: '#333'
-                                }
-                            }, '未分类');
-                        }
-
-                    }
                 },
                 {
                     title: '操作',
@@ -155,11 +133,14 @@ export default {
                                 },
                                 on: {
                                     click: function(){
-                                        //console.log(row['_id']),文章id
-                                        self.$router.push({name : 'omsAddArticle', query : {id : row['_id']}})
+                                        self.userId = row['_id'];
+                                        self.modalClickType = "controlStatus";
+                                        self.modalStatus = true;
+                                        self.userName = row['userName'];
+                                        self.userStatus = row['status'];
                                     }
                                 }
-                            }, '修改'),
+                            }, (row.status == '1' ? '冻结' : '解冻')),
                             h('Button', {
                                 props: {
                                     type: 'error',
@@ -167,9 +148,10 @@ export default {
                                 },
                                 on: {
                                     click: function(){
-                                        self.articleId = row['_id'];
+                                        self.userId = row['_id'];
+                                        self.modalClickType = "deleteUser"
                                         self.modalStatus = true;
-                                        self.articleTitle = row['title'];
+                                        self.userName = row['userName'];
                                     }
                                 }
                             }, '删除')
@@ -179,35 +161,68 @@ export default {
                 }
             ],
             modalStatus: false,
-            articleId: null,
-            articleTitle: ''
+            modalClickType: '',
+            userId: null,
+            userName: '',
+            userStatus: '2',//1为正常，2为冻结
         }
     },
     methods: {
-        deleteArticle(){
+        confirmModal(){
             let self = this;
-            this.$ajax({
-                method  : 'post',
-                url     : '/Interface/deleteArticle',
-                data    :  {
-                    userId    :   this.userInfo._id,
-                    articleId :   this.articleId
-                }
-            }).then( result => {
-                switch(result.data.retcode){
-                    case 0:
-                        self.$Message.success(result.data.retmsg);
-                        self.totalData.forEach((item, index) => {
-                            if(item._id === self.articleId){
-                                self.totalData.splice(index,1);
-                            }
-                        })
-                        break;
-                    default:
-                        self.$Message.error(result.data.retmsg);
-                        break;
-                }
-            })
+            let status = this.userStatus == '1' ?  '2' : '1';
+            switch(self.modalClickType){
+                case 'controlStatus':
+                   this.$ajax({
+                        method  : 'post',
+                        url     : '/Interface/changeUserStatus',
+                        data    :  {
+                            adminId    :   this.userInfo._id,
+                            userId     :   this.userId,
+                            status     :   status
+                        }
+                    }).then( result => {
+                        switch(result.data.retcode){
+                            case 0:
+                                self.$Message.success(result.data.retmsg);
+                                self.totalData.forEach((item, index) => {
+                                    if(item._id === self.userId){
+                                        self.$set(item, 'status', status)
+                                    }
+                                })
+                                break;
+                            default:
+                                self.$Message.error(result.data.retmsg);
+                                break;
+                        }
+                    })
+                break;
+                case 'deleteUser':
+                    this.$ajax({
+                        method  : 'post',
+                        url     : '/Interface/forceDeleteUser',
+                        data    :  {
+                            adminId     :   this.userInfo._id,
+                            userId      :   this.userId
+                        }
+                    }).then( result => {
+                        switch(result.data.retcode){
+                            case 0:
+                                self.$Message.success(result.data.retmsg);
+                                self.totalData.forEach((item, index) => {
+                                    if(item._id === self.userId){
+                                        self.totalData.splice(index,1);
+                                    }
+                                })
+                                break;
+                            default:
+                                self.$Message.error(result.data.retmsg);
+                                break;
+                        }
+                    })
+                    break;
+
+            }
         }
     },
     computed: {

@@ -25,9 +25,10 @@
     <Modal
         v-model="modalStatus"
         title="操作"
-        @on-ok="deleteArticle">
+        @on-ok="confirmModal">
         <Icon type="ios-information" class="warn_icon"></Icon>
-        <p class="model_conten">确定删除文章"{{articleTitle}}"?</p>
+        <p v-if="modalClickType == 'deleteArticle'" class="model_conten">确定删除文章"{{articleTitle}}"?</p>
+        <p v-if="modalClickType == 'controlHot'" class="model_conten">确定{{articleStatus ? '不' : ''}}将文章“{{articleTitle}}”其推荐到热门博客?</p>
     </Modal>
 </div>
 </template>
@@ -45,7 +46,7 @@ export default {
 
         this.$ajax({
             method  : 'post',
-            url     : '/Interface/getArticleListById',
+            url     : '/Interface/getAllArticleList',
             data    :  {
                 userId  :   this.userInfo._id
             }
@@ -108,6 +109,11 @@ export default {
                     ellipsis: true
                 },
                 {
+                    title: '作者',
+                    key: 'userName',
+                    ellipsis: true
+                },
+                {
                     title: '发布时间',
                     key: 'createDate',
                     ellipsis: true
@@ -155,11 +161,14 @@ export default {
                                 },
                                 on: {
                                     click: function(){
-                                        //console.log(row['_id']),文章id
-                                        self.$router.push({name : 'omsAddArticle', query : {id : row['_id']}})
+                                        self.articleId = row['_id'];
+                                        self.modalClickType = "controlHot";
+                                        self.modalStatus = true;
+                                        self.articleTitle = row['title'];
+                                        self.articleStatus = row['status'];
                                     }
                                 }
-                            }, '修改'),
+                            }, (row.status == 1 ? '隐藏' : '显示')),
                             h('Button', {
                                 props: {
                                     type: 'error',
@@ -168,6 +177,7 @@ export default {
                                 on: {
                                     click: function(){
                                         self.articleId = row['_id'];
+                                        self.modalClickType = "deleteArticle"
                                         self.modalStatus = true;
                                         self.articleTitle = row['title'];
                                     }
@@ -179,35 +189,68 @@ export default {
                 }
             ],
             modalStatus: false,
+            modalClickType: '',
             articleId: null,
-            articleTitle: ''
+            articleTitle: '',
+            articleStatus: 0
         }
     },
     methods: {
-        deleteArticle(){
+        confirmModal(){
             let self = this;
-            this.$ajax({
-                method  : 'post',
-                url     : '/Interface/deleteArticle',
-                data    :  {
-                    userId    :   this.userInfo._id,
-                    articleId :   this.articleId
-                }
-            }).then( result => {
-                switch(result.data.retcode){
-                    case 0:
-                        self.$Message.success(result.data.retmsg);
-                        self.totalData.forEach((item, index) => {
-                            if(item._id === self.articleId){
-                                self.totalData.splice(index,1);
-                            }
-                        })
-                        break;
-                    default:
-                        self.$Message.error(result.data.retmsg);
-                        break;
-                }
-            })
+            let status = this.articleStatus ? 0 : 1;
+            switch(self.modalClickType){
+                case 'controlHot':
+                   this.$ajax({
+                        method  : 'post',
+                        url     : '/Interface/changeArticleStatus',
+                        data    :  {
+                            userId    :   this.userInfo._id,
+                            articleId :   this.articleId,
+                            status    :   status
+                        }
+                    }).then( result => {
+                        switch(result.data.retcode){
+                            case 0:
+                                self.$Message.success(result.data.retmsg);
+                                self.totalData.forEach((item, index) => {
+                                    if(item._id === self.articleId){
+                                        self.$set(item, 'status', status)
+                                    }
+                                })
+                                break;
+                            default:
+                                self.$Message.error(result.data.retmsg);
+                                break;
+                        }
+                    })
+                break;
+                case 'deleteArticle':
+                    this.$ajax({
+                        method  : 'post',
+                        url     : '/Interface/forceDeleteArticle',
+                        data    :  {
+                            userId    :   this.userInfo._id,
+                            articleId :   this.articleId
+                        }
+                    }).then( result => {
+                        switch(result.data.retcode){
+                            case 0:
+                                self.$Message.success(result.data.retmsg);
+                                self.totalData.forEach((item, index) => {
+                                    if(item._id === self.articleId){
+                                        self.totalData.splice(index,1);
+                                    }
+                                })
+                                break;
+                            default:
+                                self.$Message.error(result.data.retmsg);
+                                break;
+                        }
+                    })
+                    break;
+
+            }
         }
     },
     computed: {

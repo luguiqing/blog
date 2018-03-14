@@ -169,4 +169,81 @@ module.exports = new class extends Controller {
 			}
 		})
 	}
+
+	getAllArticleList( req, res ){
+		this.validEmpty(["userId"], req.body);
+
+		return this.request('/article/getAllArticleList', req.body).then( result => {
+			return {
+				data : result,
+				str  : "获取全部文章列表"
+			}
+		})
+	}
+
+	changeArticleStatus( req, res ){
+		this.validEmpty(["userId", "articleId", "status"], req.body);
+
+		return this.request('/article/changeArticleStatus', req.body).then( result => {
+			return {
+				data : result,
+				str  : "更改文章状态成功"
+			}
+		})
+	}
+
+	forceDeleteArticle( req, res ){
+		this.validEmpty(["userId", "articleId"], req.body);
+
+		return this.request('/article/forceDeleteArticle', req.body).then( result => {
+			return {
+				data : result,
+				str  : "删除文章操作成功"
+			}
+		})
+	}
+
+	deleteArticle( req, res ){
+		this.validEmpty(["userId", "articleId"], req.body);
+
+		return this.request('/article/deleteArticle', req.body).then( result => {
+			return {
+				data : result,
+				str  : "删除文章操作成功"
+			}
+		})
+	}
+
+	changeUserStatus( req, res ){
+		this.validEmpty(["userId", "adminId"], req.body);
+
+		return this.request('/user/changeUserStatus', req.body).then( result => {
+			return {
+				data : result,
+				str  : "更改用户状态操作成功"
+			}
+		})
+	}
+
+	getUserList( req, res ){
+		this.validEmpty(["userId"], req.body);
+
+		return this.request('/user/getUserList', req.body).then( result => {
+			return {
+				data : result,
+				str  : "获取用户列表操作成功"
+			}
+		})
+	}
+
+	forceDeleteUser( req, res ){
+		this.validEmpty(["userId", "adminId"], req.body);
+
+		return this.request('/user/forceDeleteUser', req.body).then( result => {
+			return {
+				data : result,
+				str  : "删除用户操作成功"
+			}
+		})
+	}
 }();
