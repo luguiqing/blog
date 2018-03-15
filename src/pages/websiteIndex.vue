@@ -6,7 +6,7 @@
         </div>
         <div class="app_navbar">
             <div class="navbar">
-                <p style="color: #0090ce; font-family: Comic Sans MS,cursive;">River的博客系统</p>
+                <a style="display: block; color: #0090ce; font-family: Comic Sans MS,cursive;" href="/">River的博客系统</a>
                 <div style="font-size: 0;">
                     <router-link :to="{name : 'omsUserArticleList'}" v-if="isLogin" style="font-size: 14px; padding-right: 20px; vertical-align: middle;">进入管理后台>></router-link>
                     <Button type="primary" size="small" v-if="isLogin" @click="logout('logout')">登出</Button>

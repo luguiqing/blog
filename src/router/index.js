@@ -25,6 +25,12 @@ client = [
 				component: resolve => require(["@/pages/articleDetail"], resolve)
 			}
 		]
+	},
+	{
+		path: '/404',
+		name: "404",
+		meta: { requiresAuth: true },
+		component: resolve => require(["@/pages/404"], resolve)
 	}
 ]
 

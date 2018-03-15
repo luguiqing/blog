@@ -54,12 +54,12 @@
 
 </style>
 <template>
-    <a class="article_container">
+    <a class="article_container" :href="'/articleDetail?id='+article._id">
         <p class="title ellipsis">{{article.title}}</p>
         <p class="brief ellipsis">{{ article.brief | formatStrByLen(160) }}</p>
         <div class="user_info">
             <span v-if="article.userName&&article.userName.length>0">{{article.userName}} |</span>
-            <span>{{article.createDate|formatDate('hh:mm:ss')}}</span>
+            <span>{{article.createDate|formatDate('HH:mm:ss')}}</span>
         </div>
         <div class="arrow"></div>
     </a>

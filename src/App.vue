@@ -23,9 +23,9 @@ body, p, ul{
     padding: 0;
 }
 body{
-    min-width: 1000px;
+    min-width: 1100px;
     max-width: 1920px;
-    background-color: #f5f5f5;
+    background-color: #f5f5f5!important;
 }
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

@@ -87,21 +87,21 @@ export default {
                         {
                             name    :   "omsUserArticleList",
                             des     :   "随笔列表"
-                        },
-                        {
+                        }
+                        /*{
                             name    :   "omsTag",
                             des     :   "标签管理"
-                        }
+                        }*/
                     ]
                 },
                 {
                     icon    :   'ios-people',
                     title   :   '用户管理',
                     child   :   [
-                        {
+                        /*{
                             name    :   "omsupdateUserInfo",//到时直接this.$router.push({name : name})跳转
                             des     :   "修改信息"
-                        }
+                        }*/
                     ]
                 }
             ]

@@ -246,4 +246,15 @@ module.exports = new class extends Controller {
 			}
 		})
 	}
+
+	getHomeArticleDetail( req, res ){
+		this.validEmpty(["articleId"], req.body);
+
+		return this.request('/article/getHomeArticleDetail', req.body).then( result => {
+			return {
+				data : result,
+				str  : "获取文章详情操作成功"
+			}
+		})
+	}
 }();

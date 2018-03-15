@@ -5,11 +5,11 @@ const express 			= 			require("express"),
 	info 		 		= 			require("../controller/infoController"),
 	router 				= 			express.Router();
 
-const whiteApi = ['/login', '/getSight', "/getHotArticleList", "/register", "/logout"];
+const whiteApi = ['/login', '/getSight', "/getHotArticleList", "/register", "/logout", "/getHomeArticleDetail"];
 
 //开发不验证
-whiteApi.push('/addArticle', '/getArticleDetail', '/getArticleListById', '/changeArticleStatus', '/forceDeleteArticle',
-				'/deleteArticle', '/forceDeleteUser', '/changeUserStatus', '/getUserList')
+/*whiteApi.push('/addArticle', '/getArticleDetail', '/getArticleListById', '/changeArticleStatus', '/forceDeleteArticle',
+				'/deleteArticle', '/forceDeleteUser', '/changeUserStatus', '/getUserList')*/
 
 router.all("/*", (req, res, next) => {
 	let logObj = {},
@@ -88,5 +88,7 @@ router.post( "/changeUserStatus",					( ...args ) => info.safeMode( "changeUserS
 router.post( "/getUserList",					( ...args ) => info.safeMode( "getUserList", ...args ) );
 //管理员强制删除用户的全部数据
 router.post( "/forceDeleteUser",					( ...args ) => info.safeMode( "forceDeleteUser", ...args ) );
+//获取首页点击进去的文章详情
+router.post( "/getHomeArticleDetail",					( ...args ) => info.safeMode( "getHomeArticleDetail", ...args ) );
 
 module.exports = router;
