@@ -11,7 +11,10 @@ import config from "../global/config"
 import Storage from "./utils/storage"
 import {axiosRequest} from './utils/request_axios'
 
-import iView from 'iview'
+//iview局部引入
+import { Button, Table, Input, Form, Icon, Select, FormItem, Option, Row, Col, Switch, Modal, Message, Menu, MenuItem, Submenu, Page} from 'iview';
+
+//import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
@@ -21,7 +24,7 @@ Vue.config.productionTip = false
 //myadd
 Vue.prototype.$ajax = axios;
 
-Vue.use(iView);
+//Vue.use(iView);
 Vue.use(VueQuillEditor)
 
 axiosRequest();
@@ -53,6 +56,15 @@ router.beforeEach( (to, from, next) => {
 		next();
 	}
 })
+
+//iview按需引入
+let {...iviewComponent} = {Button, Table, Input, Form, Icon, Select, FormItem, Option, Row, Col, Modal, Message, Menu, MenuItem, Submenu, Page}
+for(let item in iviewComponent){
+	Vue.component(item, iviewComponent[item]);
+}
+Vue.component('i-switch', Switch);
+Vue.prototype.$Message = Message;
+
 
 Vue.filter("formatDate", (value, type )=> {
 	return Moment(value).format("YYYY-MM-DD") + ' ' + Moment(value).format(type);
