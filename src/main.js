@@ -16,7 +16,7 @@ import { Button, Table, Input, Form, Icon, Select, FormItem, Option, Row, Col, S
 
 //import iView from 'iview'
 import 'iview/dist/styles/iview.css'
-import 'quill/dist/quill.core.css'
+//import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 
 Vue.config.productionTip = false

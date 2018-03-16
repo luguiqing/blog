@@ -50,7 +50,7 @@ export default {
                         [{ 'color': [] }, { 'background': [] }],
                         [{ 'align': [] }],
                         ['clean'],
-                        ['link', 'image', 'video']
+                        ['link', 'image']//video去掉
                     ],
                     imageResize: {
                         displaySize: true
