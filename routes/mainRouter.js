@@ -8,8 +8,8 @@ const express 			= 			require("express"),
 const whiteApi = ['/login', '/getSight', "/getHotArticleList", "/register", "/logout", "/getHomeArticleDetail"];
 
 //开发不验证
-whiteApi.push('/addArticle', '/getArticleDetail', '/getArticleListById', '/changeArticleStatus', '/forceDeleteArticle',
-				'/deleteArticle', '/forceDeleteUser', '/changeUserStatus', '/getUserList')
+/*whiteApi.push('/addArticle', '/getArticleDetail', '/getArticleListById', '/changeArticleStatus', '/forceDeleteArticle',
+				'/deleteArticle', '/forceDeleteUser', '/changeUserStatus', '/getUserList')*/
 
 router.all("/*", (req, res, next) => {
 	let logObj = {},
