@@ -1,6 +1,7 @@
 const   express                 =                      require('express'),
         path                    =                      require('path'),
         favicon                 =                      require('serve-favicon'),
+        compression             =                      require("compression"),//启用压缩
         logger                  =                      require('morgan'),
         cookieParser            =                      require('cookie-parser'),
         bodyParser              =                      require('body-parser'),
@@ -22,6 +23,9 @@ app.set('port', port);
  * Listen on provided port, on all network interfaces.
  */
 server.listen(port);
+
+//启用压缩gzip, deflate
+app.use(compression());
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));

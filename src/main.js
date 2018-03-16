@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import Moment from "moment"
 import axios from "axios"
-import VueQuillEditor from 'vue-quill-editor'
+//import VueQuillEditor from 'vue-quill-editor'
 import router from './router'
 import store from "./store"
 import config from "../global/config"
@@ -25,7 +25,8 @@ Vue.config.productionTip = false
 Vue.prototype.$ajax = axios;
 
 //Vue.use(iView);
-Vue.use(VueQuillEditor)
+//不全局引用，减少打包的vender.js大小
+//Vue.use(VueQuillEditor)
 
 axiosRequest();
 //管理员路由

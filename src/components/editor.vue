@@ -24,6 +24,9 @@ Quill.register('modules/imageResize', ImageResize);
 
 export default {
     name: "editor",
+    components: {
+        quillEditor : quillEditor
+    },
     props:{
         html: {
             type    :   String,
