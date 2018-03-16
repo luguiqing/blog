@@ -63,7 +63,7 @@ app.use( "/Interface", mainRouter );
 
 app.use( "/", express.static( path.join( __dirname, "public" ) ) );
 
-app.use("/static", express.static(path.join(__dirname, "dist/static")));
+app.use("/static", express.static(path.join(__dirname, "dist/static"), {maxAge: 20*24*60*60*1000}));
 
 app.use("/*", express.static(path.join(__dirname, "dist")));
 
