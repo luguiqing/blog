@@ -67,6 +67,7 @@ module.exports = new class extends Controller {
 			password 	: 	 req.body.password
 		}).then( result => {
 			req.session.token = Math.random().toString(36).slice(3,8);
+			req.session.userInfo = result;
 			result.token = req.session.token;
 			return {
 				data : result,
@@ -89,6 +90,7 @@ module.exports = new class extends Controller {
 		this.validEmpty(["userName", "password"], req.body);
 		return this.request('/user/register', req.body).then( result => {
 			req.session.token = Math.random().toString(36).slice(3,8);
+			req.session.userInfo = result;
 			result.token = req.session.token;
 			return {
 				data : result,
@@ -118,6 +120,10 @@ module.exports = new class extends Controller {
 	addArticle( req, res ){
 		this.validEmpty(["userId", "content", "title", "brief", "status"], req.body);
 
+		if(req.session.userInfo._id !== req.body.userId){
+			this.paramError('userId错误')
+		}
+
 		return this.request('/article/addArticle', req.body).then( result => {
 			return {
 				data : result,
@@ -129,6 +135,10 @@ module.exports = new class extends Controller {
 	getArticleDetail( req, res ){
 		this.validEmpty(["userId", "articleId"], req.body);
 
+		if(req.session.userInfo._id !== req.body.userId){
+			this.paramError('userId错误')
+		}
+
 		return this.request('/article/getArticleDetail', req.body).then( result => {
 			return {
 				data : result,
@@ -139,6 +149,10 @@ module.exports = new class extends Controller {
 
 	getArticleListById( req, res ){
 		this.validEmpty(["userId"], req.body);
+
+		if(req.session.userInfo._id !== req.body.userId){
+			this.paramError('userId错误')
+		}
 
 		return this.request('/article/getArticleListById', req.body).then( result => {
 			return {
@@ -162,6 +176,10 @@ module.exports = new class extends Controller {
 	getArticleListByPageAndId( req, res ){
 		this.validEmpty(["pageSize", "page", "userId"], req.body);
 
+		if(req.session.userInfo._id !== req.body.userId){
+			this.paramError('userId错误')
+		}
+
 		return this.request('/article/getArticleListByPageAndId', req.body).then( result => {
 			return {
 				data : result,
@@ -172,6 +190,10 @@ module.exports = new class extends Controller {
 
 	getAllArticleList( req, res ){
 		this.validEmpty(["userId"], req.body);
+
+		if(req.session.userInfo._id !== req.body.userId){
+			this.paramError('userId错误')
+		}
 
 		return this.request('/article/getAllArticleList', req.body).then( result => {
 			return {
@@ -184,6 +206,10 @@ module.exports = new class extends Controller {
 	changeArticleStatus( req, res ){
 		this.validEmpty(["userId", "articleId", "status"], req.body);
 
+		if(req.session.userInfo._id !== req.body.userId){
+			this.paramError('userId错误')
+		}
+
 		return this.request('/article/changeArticleStatus', req.body).then( result => {
 			return {
 				data : result,
@@ -194,6 +220,10 @@ module.exports = new class extends Controller {
 
 	forceDeleteArticle( req, res ){
 		this.validEmpty(["userId", "articleId"], req.body);
+
+		if(req.session.userInfo._id !== req.body.userId){
+			this.paramError('userId错误')
+		}
 
 		return this.request('/article/forceDeleteArticle', req.body).then( result => {
 			return {
@@ -206,6 +236,10 @@ module.exports = new class extends Controller {
 	deleteArticle( req, res ){
 		this.validEmpty(["userId", "articleId"], req.body);
 
+		if(req.session.userInfo._id !== req.body.userId){
+			this.paramError('userId错误')
+		}
+
 		return this.request('/article/deleteArticle', req.body).then( result => {
 			return {
 				data : result,
@@ -216,6 +250,10 @@ module.exports = new class extends Controller {
 
 	changeUserStatus( req, res ){
 		this.validEmpty(["userId", "adminId"], req.body);
+
+		if(req.session.userInfo._id !== req.body.adminId){
+			this.paramError('userId错误')
+		}
 
 		return this.request('/user/changeUserStatus', req.body).then( result => {
 			return {
@@ -228,6 +266,10 @@ module.exports = new class extends Controller {
 	getUserList( req, res ){
 		this.validEmpty(["userId"], req.body);
 
+		if(req.session.userInfo._id !== req.body.userId){
+			this.paramError('userId错误')
+		}
+
 		return this.request('/user/getUserList', req.body).then( result => {
 			return {
 				data : result,
@@ -238,6 +280,10 @@ module.exports = new class extends Controller {
 
 	forceDeleteUser( req, res ){
 		this.validEmpty(["userId", "adminId"], req.body);
+
+		if(req.session.userInfo._id !== req.body.adminId){
+			this.paramError('userId错误')
+		}
 
 		return this.request('/user/forceDeleteUser', req.body).then( result => {
 			return {

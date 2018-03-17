@@ -30,6 +30,9 @@ router.all("/*", (req, res, next) => {
 	}), "Request", req.originalUrl);
 
 	if(whiteApi.indexOf(req.path) > -1){
+		//开发中添加
+		/*req.session.userInfo = {};
+		req.session.userInfo._id = req.body.adminId ? req.body.adminId : req.body.userId;*/
 		next();
 	}else{
 		console.log(req.session.token)

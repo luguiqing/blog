@@ -137,12 +137,10 @@ export default {
     },
     watch: {
         totalData(newVal, oldVal){
-            if(newVal.length > 0){
-                let sliceNum = this.arrSlice();
-                this.searchData = [];
-                this.searchData = Array.concat(newVal);
-                this.tableData = this.searchData.slice(sliceNum.start, sliceNum.end);
-            }
+            let sliceNum = this.arrSlice();
+            this.searchData = [];
+            this.searchData = Array.concat(newVal);
+            this.tableData = this.searchData.slice(sliceNum.start, sliceNum.end);
         }
     }
 }
