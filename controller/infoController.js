@@ -12,6 +12,8 @@ module.exports = new class extends Controller {
 
 		//文件格式{sightList : [], expire: ''}
 		return file.readFile('files/mySelf/sightCache.json').then( result => {
+
+			console.log("callback")
 			//缓存两个小时
 			if(result.expire && (Date.now() - result.expire) < 7200000){
 				message = result.sightList;
@@ -48,7 +50,7 @@ module.exports = new class extends Controller {
 						sightList :  message,
 						expire 	  :  Date.now()
 					};
-					return file.writeFile('files/mySelf/sightCache.json', JSON.stringify(tempStr))
+					return file.writeFile('files/mySelf/sightCache.json', JSON.stringify(tempStr), 'files/mySelf');
 
 				}).then( result => {
 					return{
