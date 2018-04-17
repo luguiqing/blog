@@ -3,7 +3,7 @@ module.exports = {
 	devHotPort      :       3051,
 	logDir   		:       "logs",
 	serverUrl 		: 		"http://127.0.0.1:3000",
-	proxyPrefix  	: 		"/api",//改完后才build
+	proxyPrefix  	: 		"",//改完后才build
 	tokenObj		: 		{
         secret  	:   'guiqingBlog',
         exp     	:    1000*60*60*2
