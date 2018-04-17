@@ -60,10 +60,12 @@ export default {
         login(type){
             this.clickType = type;
             this.visible = true;
+            _hmt.push(['_trackEvent', '登录', '打开登录弹窗'])
         },
         logout(type){
             let self = this;
             this.clickType = type;
+            _hmt.push(['_trackEvent', '退出', '退出登录'])
             this.$ajax({
                 method  : 'post',
                 url     : '/Interface/logout',
@@ -84,6 +86,7 @@ export default {
         register(type){
             this.clickType = type;
             this.visible = true;
+            _hmt.push(['_trackEvent', '注册', '打开注册弹窗'])
         },
         submit(type){
             let self = this;
