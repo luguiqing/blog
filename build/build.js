@@ -13,7 +13,10 @@ const webpackConfig = require('./webpack.prod.conf')
 
 const spinner = ora('building for production...')
 spinner.start()
-
+//guiqing
+let start, end;
+start = Date.now()
+console.log('start ====>')
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
   webpack(webpackConfig, (err, stats) => {
@@ -37,5 +40,8 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
       '  Tip: built files are meant to be served over an HTTP server.\n' +
       '  Opening index.html over file:// won\'t work.\n'
     ))
+    //guiqing
+    end = Date.now()
+    console.log('end ====>', `${end - start}ms`)
   })
 })

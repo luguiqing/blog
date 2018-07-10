@@ -13,7 +13,7 @@ module.exports = new class extends Controller {
 		//文件格式{sightList : [], expire: ''}
 		return file.readFile('files/mySelf/sightCache.json', 'json').then( result => {
 			//缓存两个小时
-			if(result.expire && (Date.now() - result.expire) < 7200000){
+			if(false && result.expire && (Date.now() - result.expire) < 7200000){
 				message = result.sightList;
 				return{
 					data: message,
@@ -27,6 +27,7 @@ module.exports = new class extends Controller {
 					page = result;
 					return page.open(url)
 				}).then( result => {
+					console.log(result)
 					if(result = "success"){
 						return page.property('content');
 					}else{
@@ -34,6 +35,7 @@ module.exports = new class extends Controller {
 					}
 				}).then( result => {
 					content = result;
+					//console.log(content)
 					return instance.exit();
 				}).then( result => {
 					let $ = cheerio.load(content, {decodeEntities: false});
@@ -44,6 +46,12 @@ module.exports = new class extends Controller {
 							brief : $(this).find('div.show-content').text()
 						})
 					});
+					if(message.length === 0){
+						message.push({
+							title: '请求被云盾的应用防火墙拦截',
+							brief: '很抱歉，由于您访问的URL有可能对网站造成安全威胁，您的访问被阻断。'
+						})
+					}
 					let tempStr = {
 						sightList :  message,
 						expire 	  :  Date.now()

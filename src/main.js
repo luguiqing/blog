@@ -57,7 +57,6 @@ router.beforeEach( (to, from, next) => {
 		next();
 	}
 })
-
 //iview按需引入
 let {...iviewComponent} = {Button, Table, Input, Form, Icon, Select, FormItem, Option, Row, Col, Modal, Message, Menu, MenuItem, Submenu, Page}
 for(let item in iviewComponent){

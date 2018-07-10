@@ -35,11 +35,12 @@ const webpackConfig = merge(baseWebpackConfig, {
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
-          warnings: false
+          warnings: false,
+          //drop_console: true// 删除所有的 `console` 语句，可以兼容ie浏览器
         }
       },
       sourceMap: config.build.productionSourceMap,
-      parallel: true
+      parallel: true//使用多进程并行运行来提高构建速度
     }),
     // extract css into its own file
     new ExtractTextPlugin({

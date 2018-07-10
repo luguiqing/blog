@@ -51,7 +51,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': require('../config/dev.env')
+            'process.env': require('../config/dev.env')//笔记 这里定义后可在前端引用process.env的值，对于自定义的，只能通过设置其值是true或者false或者借助js表达式JSON.stringify等
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
@@ -90,7 +90,6 @@ module.exports = new Promise((resolve, reject) => {
                 onErrors: config.dev.notifyOnErrors ?
                     utils.createNotifierCallback() : undefined
             }))
-
             resolve(devWebpackConfig)
         }
     })

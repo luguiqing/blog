@@ -8,6 +8,8 @@ export default class {
 		hour = date.getHours();
 		minute = date.getMinutes();
 		second = date.getSeconds();
+		//guiqing
+		//console.log('压缩打包不会去掉console.log')
 
 		return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');
 	}
