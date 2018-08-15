@@ -11,6 +11,9 @@ import config from "../global/config"
 import Storage from "./utils/storage"
 import {axiosRequest} from './utils/request_axios'
 
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
+
 //iview局部引入
 import { Button, Table, Input, Form, Icon, Select, FormItem, Option, Row, Col, Switch, Modal, Message, Menu, MenuItem, Submenu, Page} from 'iview';
 
@@ -77,6 +80,36 @@ Vue.filter("formatStrByLen", (value, len) => {
         return value;
     }
 });
+
+//entry 错误监控
+// Raven
+//     .config('https://eb207c7a1c854b4e8c58afc88cac8d65@sentry.io/1242050')
+//     .addPlugin(RavenVue, Vue)
+//     .install();
+
+// Raven.setTagsContext({
+//     environment: "production"
+// });
+// Raven.captureMessage('hello world!', {tags: {
+//     locale: 'en-us',
+//     guiqing: 'good'
+// }});
+// Raven.setUserContext({
+//     email: 'foo@example.com'+Math.random()
+// });
+// try{
+// 	console.log(guiqing)
+// }catch(e){
+// 	Raven.captureException(e,{
+// 		tags: {
+// 	    	locale: 'en-us'
+// 		},
+// 		extra:
+// 		{
+// 			contesxt: 'context'
+// 		}
+// 	})
+// }
 /* eslint-disable no-new */
 new Vue({
 	el: '#app',

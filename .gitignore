@@ -14,3 +14,5 @@ logs/
 *.ntvs*
 *.njsproj
 *.sln
+
+*/dist/
