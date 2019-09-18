@@ -33,10 +33,6 @@
 #app{
   position: relative;
   .footer{
-    position: absolute;
     text-align: center;
-    left: 50%;
-    bottom: 10px;
-    transform: translate(-50%, 0);
   }
 }
