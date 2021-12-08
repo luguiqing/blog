@@ -15,7 +15,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "bluebird": "^3.5.1",
     "body-parser": "~1.18.2",
     "body-parser-xml": "^1.1.0",
