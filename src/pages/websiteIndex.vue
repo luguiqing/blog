@@ -17,7 +17,7 @@
         </div>
         <router-view></router-view>
         <div class="footer">
-          <a href="http://www.beian.miit.gov.cn" target="_blank" rel="nofollow" class="slide slide-ct" hotrep="hp.footer.bottom.miitbeian">粤ICP备17126492号-1</a>
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow" class="slide slide-ct" hotrep="hp.footer.bottom.miitbeian">粤ICP备17126492号-1</a>
         </div>
         <Modal v-model="visible" width="460">
             <p slot="header" style="text-align:center;color:#0090ce; font-size: 20px;">用户{{clickType === 'register' ? '注册' : '登录'}}</p>
