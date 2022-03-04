@@ -3,6 +3,7 @@ const Controller = require("../lib/Controller"),
 	phantom = require('phantom'),
 	file = require('../lib/file'),
 	cheerio = require("cheerio");
+const axios = require('axios');
 
 module.exports = new class extends Controller {
 	// 获取 36氪每日资讯
@@ -310,5 +311,70 @@ module.exports = new class extends Controller {
 				str  : "获取文章详情操作成功"
 			}
 		})
+	}
+
+    async test( req, res){
+        let fail = [];
+        const phones = req.body.phones || [];
+        const authorization = req.body.authorization;
+        const instance = axios.create({
+            baseURL: 'https://shop.xinfutongtech.com',
+            timeout: 10000,
+            headers: {'authorization': authorization}
+        });
+        console.log(phones, 'phones')
+        for(let i = 0; i < phones.length; i++){
+            const fansPhone = String(phones[i]);
+            try{
+                const res = await instance.post('/mall-shopping-admin/retailFans/listRetailEmpInfo', {
+                    "corpId": "18275",
+                    "fansPhone": fansPhone,
+                    "page": 1,
+                    "limit": 10
+                });
+                const resInfo = res.data.data.data
+                console.log(resInfo)
+                let eiId;
+                if(resInfo[0]){
+                    eiId = resInfo[0]['eiId'];
+                }else{
+                    throw new Error('没有该粉丝')
+                }
+        
+                console.log(eiId)
+        
+                const res1 = await instance.get('/mall-shopping-admin/retailFans/listRetailFans', {
+                    params: {
+                        "id": eiId,
+                        "fansPhone": fansPhone,
+                        "pageNum": 1,
+                        "pageSize": 10
+                    }
+                });
+                const res1Info = res1.data.data.data
+                let id;
+                if(res1Info[0]){
+                    id = res1Info[0]['id'];
+                }else{
+                    throw new Error('该粉丝数据不存在')
+                }
+                console.log(id)
+                const res2 = await instance.get('/mall-shopping-admin/retailFans/deleteFans', {
+                    params: {
+                        "id": id,
+                        "empId": eiId
+                    }
+                });
+            }catch(err){
+                fail.push([{
+                    '电话': fansPhone,
+                    '错误原因': err.message
+                }])
+            }
+        }
+        return {
+            data : fail,
+            str  : "操作成功"
+        }
 	}
 }();

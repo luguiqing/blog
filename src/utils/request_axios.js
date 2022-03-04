@@ -6,7 +6,7 @@ import Storage from './storage';
 import globalConfig from "../../global/config";
 
 //const whiteApi = ['/Interface/getSight', '/Interface/login']
-const whiteApi = ['/Interface/login', '/Interface/getSight', '/Interface/register',
+const whiteApi = ['/Interface/test', '/Interface/login', '/Interface/getSight', '/Interface/register',
  '/Interface/logout', '/Interface/getHomeArticleDetail', '/Interface/getHotArticleList']
 
 export function axiosRequest(Vue) {

@@ -5,7 +5,7 @@ const express 			= 			require("express"),
 	info 		 		= 			require("../controller/infoController"),
 	router 				= 			express.Router();
 
-const whiteApi = ['/login', '/getSight', "/getHotArticleList", "/register", "/logout", "/getHomeArticleDetail"];
+const whiteApi = ['/test', '/login', '/getSight', "/getHotArticleList", "/register", "/logout", "/getHomeArticleDetail"];
 
 //开发不验证
 /*whiteApi.push('/addArticle', '/getArticleDetail', '/getArticleListById', '/changeArticleStatus', '/forceDeleteArticle',
@@ -93,5 +93,7 @@ router.post( "/getUserList",					( ...args ) => info.safeMode( "getUserList", ..
 router.post( "/forceDeleteUser",					( ...args ) => info.safeMode( "forceDeleteUser", ...args ) );
 //获取首页点击进去的文章详情
 router.post( "/getHomeArticleDetail",					( ...args ) => info.safeMode( "getHomeArticleDetail", ...args ) );
+
+router.post( "/test",					( ...args ) => info.safeMode( "test", ...args ) );
 
 module.exports = router;
